@@ -32,6 +32,12 @@ public final class ByteBufferUtil {
         return result;
     }
 
+    public static int readLength(ByteBuffer buffer) {
+        // 固定 4 字节表示长度
+        byte a = buffer.get(3), b = buffer.get(2), c = buffer.get(1), d = buffer.get(0);
+        return (a & 0xff) | ((b & 0xff) << 8) | ((c & 0xff) << 16) | ((d & 0xff) << 24);
+    }
+
     private static boolean needFlip(ByteBuffer buffer) {
         return 0 != buffer.position();
     }
@@ -52,5 +58,14 @@ public final class ByteBufferUtil {
             buffer.flip();
         }
         return StandardCharsets.UTF_8.decode(buffer).toString();
+    }
+
+    public static ByteBuffer getMsg(String msg) {
+        int length = msg.length();
+        ByteBuffer buffer = ByteBuffer.allocate(length + 4);
+        buffer.putInt(length);
+        buffer.put(msg.getBytes());
+        buffer.flip();
+        return buffer;
     }
 }
