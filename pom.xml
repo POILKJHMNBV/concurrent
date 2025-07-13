@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>basics</module>
+        <module>netty</module>
     </modules>
 
     <properties>
@@ -18,6 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j.version>2.17.1</log4j.version>
         <hutool.version>5.8.25</hutool.version>
+        <netty.version>4.2.2.Final</netty.version>
     </properties>
 
     <dependencyManagement>
@@ -26,6 +28,11 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
